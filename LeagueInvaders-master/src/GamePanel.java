@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,64 +10,131 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{  
- 
-	@Override
-
-	
-	public void paintComponent(Graphics g){
-
-
-	        }
 	final int MENU_STATE = 0;
 
 	final int GAME_STATE = 1;
 
 	final int END_STATE = 2;
-	
 	int currentState = MENU_STATE;
 	
-	Timer timer = new Timer(1000 / 60, this);
-	
-	public void updateMenuState() {
+	public Font titleFont;
+	Rocketship rocket = new Rocketship(250,700,50,50);
+	public GamePanel() {
+		 titleFont = new Font("Arial",Font.PLAIN, 48);
+
+		 
 	}
-	public void updateGameState(){}
-	public void updateEndState() {}
 	
+	@Override
+	
+
+	public void paintComponent(Graphics g){
+		if(currentState == MENU_STATE){
+			
+            drawMenuState(g);
+
+    }else if(currentState == GAME_STATE){
+
+            drawGameState(g);
+
+    }else if(currentState == END_STATE){
+
+            drawEndState(g);
+
+    }
+
+
+	                
+
+	        }
+	Timer timer = new Timer(1000 / 60, this);
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+	
+		if(currentState == MENU_STATE){
+		
+            updateMenuState();
+
+    }else if(currentState == GAME_STATE){
+
+            updateGameState();
+
+    }else if(currentState == END_STATE){
+
+            updateEndState();
+
+    }
 		repaint();
 	}
 	
 	public void startGame() {
-	
 		timer.start();
 	
 	}
-public void update() {
-    	
-    }
-public void draw(Graphics g){
-	
-}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("gay");
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("supergay");
-	}
+		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+currentState++;
+if(currentState > END_STATE){
+	
 
+                currentState = MENU_STATE;
+
+        }
+		// TODO Auto-generated method stub
+	
+	}
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("megagay");
+	
 	}
+	public void updateMenuState() {
+		
+	}
+public void updateGameState() {
+		rocket.update();
+	}
+public void updateEndState() {
+	
 }
+	public void drawMenuState(Graphics g) {
+		g.setColor(Color.PINK);
+		g.setFont(titleFont);
+		  
+		   
+		g.setColor(Color.BLUE);
+
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);  
+		g.setColor(Color.BLACK);
+		 g.drawString("League Invaders", 85, 90);
+		 g.drawString("Smash That Enter", 85, 250);
+		 g.drawString("Button!!!!!!!!!!", 85, 300);
+	}
+	public void drawGameState(Graphics g) {
+		g.setColor(Color.BLACK);
+
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		g.setColor(Color.BLUE);
+		rocket.draw(g);
+	}
+	public void drawEndState(Graphics g) {
+		g.setColor(Color.RED);
+
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT); 
+		g.setColor(Color.PINK);
+		 g.drawString("U Ded Foo", 100, 90);
+	}
+	}
+
