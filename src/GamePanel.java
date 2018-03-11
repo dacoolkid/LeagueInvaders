@@ -18,8 +18,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	int currentState = MENU_STATE;
 	
 	public Font titleFont;
+	Rocketship rocket = new Rocketship(250,700,50,50);
 	public GamePanel() {
 		 titleFont = new Font("Arial",Font.PLAIN, 48);
+
 		 
 	}
 	
@@ -28,7 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 
 	public void paintComponent(Graphics g){
 		if(currentState == MENU_STATE){
-			System.out.println("We are missing something here we gotta figure out what it is");
+			
             drawMenuState(g);
 
     }else if(currentState == GAME_STATE){
@@ -102,7 +104,7 @@ if(currentState > END_STATE){
 		
 	}
 public void updateGameState() {
-		
+		rocket.update();
 	}
 public void updateEndState() {
 	
@@ -110,21 +112,29 @@ public void updateEndState() {
 	public void drawMenuState(Graphics g) {
 		g.setColor(Color.PINK);
 		g.setFont(titleFont);
-		   g.drawString("text", 90, 90);
+		  
 		   
 		g.setColor(Color.BLUE);
 
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);    
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);  
+		g.setColor(Color.BLACK);
+		 g.drawString("League Invaders", 85, 90);
+		 g.drawString("Smash That Enter", 85, 250);
+		 g.drawString("Button!!!!!!!!!!", 85, 300);
 	}
 	public void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);    
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		g.setColor(Color.BLUE);
+		rocket.draw(g);
 	}
 	public void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);    
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT); 
+		g.setColor(Color.PINK);
+		 g.drawString("U Ded Foo", 100, 90);
 	}
 	}
 
