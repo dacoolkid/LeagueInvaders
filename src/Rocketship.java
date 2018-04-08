@@ -9,12 +9,10 @@ int speed ;
 		
 	} 
 	public void draw(Graphics g) {
-		 g.setColor(Color.BLUE);
-
-	     g.fillRect(x, y, width, height);
+		y++;
 	}
 	public void update() {
-		
+		super.update();
 	
 	}
 	
